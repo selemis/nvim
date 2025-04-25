@@ -1,0 +1,22 @@
+# Plugin directories
+plugin/packer_compiled.lua
+/plugin/
+
+# Package manager directories
+/pack/
+
+# Third-party plugins installed via package managers
+lazy-lock.json
+
+# Generated files
+.netrwhist
+
+# Logs
+/logs/
+
+# Persistent undo
+/undo/
+
+# LSP, DAP caches
+.luarc.json
+.templ
