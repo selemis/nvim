@@ -51,5 +51,21 @@ return {
         end
     },
 
+    -- Replacement for Tabularize.vim
+    {
+        'echasnovski/mini.align',
+        version = false,
+        event = "VeryLazy",
+        config = function()
+            require('mini.align').setup({
+                -- Module mappings. Use `''` (empty string) to disable one.
+                mappings = {
+                    start = 'ga',
+                    start_with_preview = 'gA',
+                },
+            })
+        end
+    }
+
   -- Add more plugins here as we migrate them
 }
