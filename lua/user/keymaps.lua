@@ -10,3 +10,6 @@ vim.keymap.set('n', 'k', 'gk')
 
 -- Edit vimrc in new tab
 vim.keymap.set('n', '<leader>ev', ':tabedit $MYVIMRC<CR>')
+
+-- Remove trailing whitespace, mini.trailspace plugin
+vim.keymap.set('n', '<leader>ts', function() require('mini.trailspace').trim() end, { desc = "Trim trailing whitespace" })
