@@ -34,7 +34,7 @@ return {
                     left = '<LEFT>',
                     right = '<RIGHT>',
                     down = '<DOWN>',
-                    up = '<RIGHT>',
+                    up = '<UP>',
 
                     -- Move current line in Normal mode
                     line_left = '',
