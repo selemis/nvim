@@ -92,6 +92,44 @@ return {
             -- Similar to your netrw mapping
             vim.keymap.set('n', '-', ':NvimTreeFocus<CR>', {silent = true})
         end
+    },
+    -- Replacement for ctrl-p
+    {
+        "nvim-telescope/telescope.nvim",
+        branch = "0.1.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                build = "make"
+            }
+        },
+        config = function()
+            require("telescope").setup({
+                defaults = {
+                    file_ignore_patterns = {"node_modules", ".git"},
+                    layout_strategy = "horizontal",
+                },
+                extensions = {
+                    fzf = {
+                        fuzzy = true,
+                        override_generic_sorter = true,
+                        override_file_sorter = true,
+                        case_mode = "smart_case",
+                    }
+                }
+            })
+
+            -- Load extensions
+            require("telescope").load_extension("fzf")
+
+            -- Key mappings similar to your CtrlP config
+            vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files, {})
+            vim.keymap.set('n', '<C-r>', require('telescope.builtin').oldfiles, {})
+            vim.keymap.set('n', '<leader>f', function()
+                vim.cmd('Telescope find_files')
+            end, {})
+        end
     }
 
   -- Add more plugins here as we migrate them
