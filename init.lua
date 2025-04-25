@@ -1,8 +1,6 @@
--- Enable true color support for terminals that support it
-vim.opt.termguicolors=true
-
--- Show line numbers in the left margin
-vim.opt.number=true
+-- Load user configuration
+require("user.options")
+require("user.keymaps")
 
 -- Set up lazy.nvim plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
