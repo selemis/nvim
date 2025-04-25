@@ -65,6 +65,33 @@ return {
                 },
             })
         end
+    },
+
+    {
+        "nvim-tree/nvim-tree.lua",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons", -- Optional, for file icons
+        },
+        event = "VeryLazy",
+        config = function()
+            require("nvim-tree").setup({
+                sort_by = "case_sensitive",
+                view = {
+                    width = 30,
+                },
+                renderer = {
+                    group_empty = true,
+                },
+                filters = {
+                    dotfiles = false,
+                },
+            })
+
+            -- Key mappings
+            vim.keymap.set('n', '<leader>1', ':NvimTreeToggle<CR>', {silent = true})
+            -- Similar to your netrw mapping
+            vim.keymap.set('n', '-', ':NvimTreeFocus<CR>', {silent = true})
+        end
     }
 
   -- Add more plugins here as we migrate them
