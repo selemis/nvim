@@ -20,3 +20,5 @@ vim.opt.rtp:prepend(lazypath)
 -- Initialize plugins
 require("lazy").setup("user.plugins")
 require("user.theme").setup()
+require("user.shell_env").setup()
+require("user.elixir_diagnostics").setup()
