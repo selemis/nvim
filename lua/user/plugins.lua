@@ -1,13 +1,36 @@
 -- ~/.config/nvim/lua/user/plugins.lua
 
 return {
-    -- Colorscheme
+
+    -- Colorschemes/Themes
     {
         "ellisonleao/gruvbox.nvim",
-        priority = 1000, -- Load colorscheme early
-        config = function()
-            vim.cmd.colorscheme "gruvbox"
-        end,
+        priority = 1000, -- High priority to load early
+    },
+
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        priority = 1000,
+    },
+    {
+        "folke/tokyonight.nvim",
+        priority = 1000,
+    },
+
+    {
+        "rebelot/kanagawa.nvim",
+        priority = 1000,
+    },
+
+    {
+        "shaunsingh/solarized.nvim",  -- Solarized theme
+        priority = 1000,
+    },
+
+    {
+        "maxmx03/solarized.nvim",  -- Another implementation with both light and dark variants
+        priority = 1000,
     },
 
     {
@@ -129,6 +152,11 @@ return {
             vim.keymap.set('n', '<leader>f', function()
                 vim.cmd('Telescope find_files')
             end, {})
+
+            -- Add coloscheme picker
+            vim.keymap.set('n', '<leader>ct', function()
+                require('telescope.builtin').colorscheme({enable_preview = true})
+            end)
         end
     }
 
