@@ -255,6 +255,17 @@ return {
         end,
     },
 
+    {
+        "github/copilot.vim",
+        lazy = false,
+        config = function()
+            -- Basic configuration
+            vim.g.copilot_no_tab_map = true
+            vim.api.nvim_set_keymap("i", "<C-j>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+            vim.api.nvim_set_keymap("i", "<C-l>", 'copilot#Next()', { silent = true, expr = true })
+            vim.api.nvim_set_keymap("i", "<C-h>", 'copilot#Previous()', { silent = true, expr = true })
+        end
+    }
 
   -- Add more plugins here as we migrate them
 }
