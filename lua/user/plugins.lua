@@ -1,4 +1,4 @@
-;-- ~/.config/nvim/lua/user/plugins.lua
+-- ~/.config/nvim/lua/user/plugins.lua
 
 -- Add this to the top of your plugins.lua file, outside any plugin definitions
 local function read_env_file()
@@ -265,6 +265,62 @@ return {
             vim.api.nvim_set_keymap("i", "<C-l>", 'copilot#Next()', { silent = true, expr = true })
             vim.api.nvim_set_keymap("i", "<C-h>", 'copilot#Previous()', { silent = true, expr = true })
         end
+    },
+
+    -- LSP Support
+    {
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            "williamboman/mason.nvim",           -- Optional but recommended
+            "williamboman/mason-lspconfig.nvim", -- Optional but recommended
+            "hrsh7th/cmp-nvim-lsp",             -- For autocompletion
+        },
+        event = "VeryLazy",
+        config = function()
+            require("user.lsp").setup()
+        end,
+    },
+
+    -- Autocompletion
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            "hrsh7th/cmp-buffer",      -- Buffer completions
+            "hrsh7th/cmp-path",        -- Path completions
+            "hrsh7th/cmp-cmdline",     -- Command line completions
+            "hrsh7th/cmp-nvim-lsp",    -- LSP completions
+            "saadparwaiz1/cmp_luasnip", -- Snippet completions
+            "L3MON4D3/LuaSnip",        -- Snippet engine
+        },
+        event = "InsertEnter",
+        config = function()
+            require("user.completion").setup()
+        end,
+    },
+
+    -- Mason for managing LSP servers, formatters, and linters
+    {
+        "williamboman/mason.nvim",
+        cmd = "Mason",
+        event = "VeryLazy",
+        config = function()
+            require("mason").setup()
+        end,
+    },
+
+    {
+        "williamboman/mason-lspconfig.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("mason-lspconfig").setup({
+                ensure_installed = {
+                    "elixirls", -- Elixir Language Server
+                }
+            })
+        end,
+        dependencies = {
+            "williamboman/mason.nvim"
+        }
     },
 
     {
