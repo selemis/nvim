@@ -1,4 +1,4 @@
--- ~/.config/nvim/lua/user/plugins.lua
+;-- ~/.config/nvim/lua/user/plugins.lua
 
 -- Add this to the top of your plugins.lua file, outside any plugin definitions
 local function read_env_file()
@@ -265,7 +265,13 @@ return {
             vim.api.nvim_set_keymap("i", "<C-l>", 'copilot#Next()', { silent = true, expr = true })
             vim.api.nvim_set_keymap("i", "<C-h>", 'copilot#Previous()', { silent = true, expr = true })
         end
-    }
+    },
+
+    {
+        'roman/golden-ratio',
+        config = function()
+        end
+    },
 
   -- Add more plugins here as we migrate them
 }
