@@ -158,7 +158,70 @@ return {
                 require('telescope.builtin').colorscheme({enable_preview = true})
             end)
         end
-    }
+    },
+
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        priority = 800,
+        config = function()
+            require("nvim-treesitter.configs").setup({
+                -- A list of parser names, or "all" (parsers with treesitter support)
+                ensure_installed = {
+                    "lua", "vim", "vimdoc", "query", -- For Neovim itself
+                    "bash", "markdown", "markdown_inline", -- Common formats
+                    "elixir", "heex", "eex", -- Elixir
+                    "javascript", "typescript", "html", "css", -- Web
+                    "json", "yaml", "toml", -- Data formats
+                    "c", "python", "ruby", -- Other languages
+                },
+
+                -- Install parsers synchronously (only applied to `ensure_installed`)
+                sync_install = false,
+
+                -- Automatically install missing parsers when entering buffer
+                auto_install = true,
+
+                highlight = {
+                    enable = true,
+                    -- Using TreeSitter disables the Vim regex syntax highlighting
+                    additional_vim_regex_highlighting = false,
+                },
+
+                indent = {
+                    enable = true,
+                },
+
+                -- Incremental selection based on the named nodes from the grammar
+                incremental_selection = {
+                    enable = true,
+                    keymaps = {
+                        init_selection = "gnn", -- Start incremental selection
+                        node_incremental = "grn", -- Increment selection to next named node
+                        scope_incremental = "grc", -- Increment selection to next scope
+                        node_decremental = "grm", -- Decrement selection to previous node
+                    },
+                },
+            })
+        end,
+    },
+
+    -- Rainbow parentheses using treesitter
+    {
+        "HiPhish/nvim-ts-rainbow2",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        config = function()
+            require("nvim-treesitter.configs").setup({
+                rainbow = {
+                    enable = true,
+                    -- Which query to use for finding delimiters
+                    query = 'rainbow-parens',
+                    -- Highlight the entire buffer all at once
+                    strategy = require('ts-rainbow').strategy.global,
+                },
+            })
+        end,
+    },
 
   -- Add more plugins here as we migrate them
 }
