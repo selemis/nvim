@@ -1,5 +1,36 @@
 -- ~/.config/nvim/lua/user/plugins.lua
 
+-- Add this to the top of your plugins.lua file, outside any plugin definitions
+local function read_env_file()
+  local home = os.getenv("HOME")
+  local env_path = home .. "/.env"
+  local file = io.open(env_path, "r")
+
+  if not file then
+    print("Could not open .env file at: " .. env_path)
+    return false
+  end
+
+  local contents = file:read("*all")
+  file:close()
+
+  for line in contents:gmatch("[^\r\n]+") do
+    local key, value = line:match("^([%w_]+)=(.+)$")
+    if key and value then
+      -- Remove any quotes that might be present
+      value = value:gsub('^"(.*)"$', '%1')
+      value = value:gsub("^'(.*)'$", '%1')
+
+      -- Set environment variable
+      vim.fn.setenv(key, value)
+      print("Set environment variable: " .. key)
+    end
+  end
+
+  return true
+end
+
+
 return {
 
     -- Colorschemes/Themes
@@ -13,6 +44,7 @@ return {
         name = "catppuccin",
         priority = 1000,
     },
+
     {
         "folke/tokyonight.nvim",
         priority = 1000,
@@ -222,6 +254,7 @@ return {
             })
         end,
     },
+
 
   -- Add more plugins here as we migrate them
 }
