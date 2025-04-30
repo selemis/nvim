@@ -273,5 +273,17 @@ return {
         end
     },
 
+    -- Add nvim-surround
+    {
+        "kylechui/nvim-surround",
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        event = "VeryLazy",
+        config = function()
+          require("nvim-surround").setup({
+            -- Configuration here, or leave empty for defaults
+          })
+        end
+    },
+
   -- Add more plugins here as we migrate them
 }
