@@ -1,4 +1,4 @@
-;-- ~/.config/nvim/lua/user/plugins.lua
+-- ~/.config/nvim/lua/user/plugins.lua
 
 -- Add this to the top of your plugins.lua file, outside any plugin definitions
 local function read_env_file()
